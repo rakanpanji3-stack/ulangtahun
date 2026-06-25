@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Ulang Tahun Najwa ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    overflow:hidden;
+    height:100vh;
+    background:linear-gradient(135deg,#ffd6e0,#ffe8ee,#fff7f9);
+}
+
+/* PAGE */
+.page{
+    width:100%;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+#page2{
+    display:none;
+    animation:fadeIn 1.5s;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* CARD */
+.card{
+    background:rgba(255,255,255,.85);
+    backdrop-filter:blur(10px);
+    padding:40px;
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
+    max-width:700px;
+    z-index:2;
+}
+
+h1{
+    color:#ff4d6d;
+    margin-bottom:15px;
+}
+
+p{
+    color:#555;
+    line-height:1.8;
+}
+
+/* BUTTON */
+button{
+    margin-top:20px;
+    border:none;
+    padding:14px 30px;
+    border-radius:30px;
+    background:#ff4d6d;
+    color:white;
+    font-size:1rem;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+/* CAKE */
+.cake{
+    position:relative;
+    width:180px;
+    margin:30px auto;
+}
+
+.cake-top{
+    height:50px;
+    background:#ffc2d1;
+    border-radius:15px 15px 8px 8px;
+}
+
+.cake-bottom{
+    height:60px;
+    background:#ff8fab;
+    border-radius:0 0 15px 15px;
+}
+
+.candle{
+    position:absolute;
+    top:-40px;
+    left:50%;
+    transform:translateX(-50%);
+    width:14px;
+    height:40px;
+    background:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+#flame{
+    position:absolute;
+    top:-28px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:24px;
+    animation:flicker .5s infinite alternate;
+}
+
+@keyframes flicker{
+    from{
+        transform:translateX(-50%) scale(1);
+    }
+    to{
+        transform:translateX(-50%) scale(1.15);
+    }
+}
+
+/* ROSE */
+.rose{
+    position:absolute;
+    top:-30px;
+    font-size:22px;
+    pointer-events:none;
+    animation:fall linear forwards;
+    z-index:1;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(360deg);
+    }
+}
+
+/* FIREWORK */
+.firework{
+    position:fixed;
+    font-size:30px;
+    z-index:999;
+    pointer-events:none;
+    animation:explode 1.5s forwards;
+}
+
+@keyframes explode{
+    from{
+        transform:scale(0);
+        opacity:1;
+    }
+    to{
+        transform:scale(5);
+        opacity:0;
+    }
+}
+
+#wish{
+    margin-top:20px;
+    color:#ff4d6d;
+    font-weight:bold;
+    display:none;
+}
+</style>
+</head>
+<body>
+
+<audio id="music">
+    <source src="Ruth B. - Dandelions (Lyrics).mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page">
+    <div class="card">
+        <h1>💌 Untuk Najwa</h1>
+
+        <p>
+            Ada sebuah kejutan kecil yang sudah menunggumu.
+        </p>
+
+        <button onclick="openCard()">
+            🎁 Buka Ucapan
+        </button>
+    </div>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+    <div class="card">
+
+        <h1>🎂 Selamat Ulang Tahun Najwa 🎂</h1>
+
+        <div class="cake">
+
+            <div class="candle" onclick="blowCandle()">
+                <div id="flame">🔥</div>
+            </div>
+
+            <div class="cake-top"></div>
+            <div class="cake-bottom"></div>
+
+        </div>
+
+        <p>
+            Selamat ulang tahun Najwa 🌹<br><br>
+
+            Semoga di usia yang baru ini,
+            kamu selalu diberikan kesehatan,
+            kebahagiaan, keberuntungan,
+            dan semua impian yang ingin kamu capai
+            dapat terwujud satu per satu. ✨
+        </p>
+
+        <div id="wish">
+            💖 Semoga semua harapanmu terkabul. 💖
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+/* BUKA UCAPAN */
+function openCard(){
+
+    document.getElementById("page1").style.display="none";
+
+    document.getElementById("page2").style.display="flex";
+
+    document.getElementById("music").play();
+
+}
+
+/* PADAMKAN LILIN */
+function blowCandle(){
+
+    const flame=document.getElementById("flame");
+
+    flame.innerHTML="💨";
+
+    setTimeout(()=>{
+        flame.style.display="none";
+    },700);
+
+    document.getElementById("wish").style.display="block";
+
+    launchFireworks();
+
+}
+
+/* KEMBANG API */
+function launchFireworks(){
+
+    const icons=["✨","🎆","🎇"];
+
+    for(let i=0;i<30;i++){
+
+        setTimeout(()=>{
+
+            let fw=document.createElement("div");
+
+            fw.className="firework";
+
+            fw.innerHTML=
+            icons[Math.floor(Math.random()*icons.length)];
+
+            fw.style.left=Math.random()*100+"vw";
+            fw.style.top=Math.random()*80+"vh";
+
+            document.body.appendChild(fw);
+
+            setTimeout(()=>{
+                fw.remove();
+            },1500);
+
+        },i*100);
+
+    }
+}
+
+/* MAWAR BERJATUHAN */
+function createRose(){
+
+    let rose=document.createElement("div");
+
+    rose.className="rose";
+
+    rose.innerHTML="🌹";
+
+    rose.style.left=Math.random()*100+"vw";
+
+    rose.style.animationDuration=
+    (Math.random()*5+5)+"s";
+
+    document.body.appendChild(rose);
+
+    setTimeout(()=>{
+        rose.remove();
+    },10000);
+}
+
+setInterval(createRose,700);
+
+</script>
+
+</body>
+</html>
